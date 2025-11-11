@@ -1,6 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://emuvws28axty"]
+[gd_scene load_steps=8 format=3 uid="uid://emuvws28axty"]
 
 [ext_resource type="Script" uid="uid://b8ncubte35br3" path="res://scenes/clicker/prototype_clicker.gd" id="1_tckfa"]
+[ext_resource type="Texture2D" uid="uid://bjs4exk5ymyy5" path="res://assets/RADL_Book.png" id="2_4xgn7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hof2"]
+atlas = ExtResource("2_4xgn7")
+region = Rect2(570, 0, 190, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jva1n"]
+atlas = ExtResource("2_4xgn7")
+region = Rect2(760, 0, 190, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njxam"]
+atlas = ExtResource("2_4xgn7")
+region = Rect2(950, 0, 190, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r2dr"]
+atlas = ExtResource("2_4xgn7")
+region = Rect2(1140, 0, 190, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2efjs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hof2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jva1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njxam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r2dr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hof2")
+}],
+"loop": false,
+"name": &"PageFlip",
+"speed": 5.0
+}]
 
 [node name="PrototypeClicker" type="Control" node_paths=PackedStringArray("label")]
 layout_mode = 3
@@ -28,7 +68,7 @@ text = "Pages: <value>"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TurnPageButton" type="Button" parent="." groups=["Persist"]]
+[node name="TurnPageButton" type="TextureButton" parent="." groups=["Persist"]]
 custom_minimum_size = Vector2(160, 40)
 layout_mode = 1
 anchors_preset = 8
@@ -36,12 +76,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
+offset_left = -80.0
+offset_top = -11.0
+offset_right = 80.0
+offset_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Turn the Page"
+mouse_default_cursor_shape = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TurnPageButton"]
+position = Vector2(82, 56)
+sprite_frames = SubResource("SpriteFrames_2efjs")
+animation = &"PageFlip"
 
 [connection signal="pressed" from="TurnPageButton" to="." method="_on_button_pressed"]
