@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b8ncubte35br3" path="res://scenes/clicker/prototype_clicker.gd" id="1_tckfa"]
 
-[node name="PrototypeClicker" type="Control"]
+[node name="PrototypeClicker" type="Control" node_paths=PackedStringArray("label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,8 +14,9 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tckfa")
+label = NodePath("PagesValueLabel")
 
-[node name="Label" type="Label" parent="."]
+[node name="PagesValueLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 1
 anchors_preset = 10
@@ -27,8 +28,8 @@ text = "Pages: <value>"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="."]
-custom_minimum_size = Vector2(80, 20)
+[node name="TurnPageButton" type="Button" parent="." groups=["Persist"]]
+custom_minimum_size = Vector2(160, 40)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,3 +43,5 @@ offset_bottom = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Turn the Page"
+
+[connection signal="pressed" from="TurnPageButton" to="." method="_on_button_pressed"]
