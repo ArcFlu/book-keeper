@@ -1,24 +1,24 @@
 [gd_scene load_steps=14 format=3 uid="uid://emuvws28axty"]
 
-[ext_resource type="Script" uid="uid://b8ncubte35br3" path="res://scenes/clicker/prototype_clicker.gd" id="1_tckfa"]
-[ext_resource type="Texture2D" uid="uid://bjs4exk5ymyy5" path="res://assets/RADL_Book.png" id="2_4xgn7"]
-[ext_resource type="Texture2D" uid="uid://dyratjfbdlsur" path="res://assets/20250421manaSoulButtonA-Sheet.png" id="3_1hof2"]
-[ext_resource type="Script" uid="uid://2xy44chgl25" path="res://scenes/clicker/first_button_upgrade.gd" id="3_jva1n"]
+[ext_resource type="Script" uid="uid://b8ncubte35br3" path="res://scenes/clicker/bookkeeper_clicker.gd" id="1_du17k"]
+[ext_resource type="Texture2D" uid="uid://bjs4exk5ymyy5" path="res://assets/RADL_Book.png" id="2_ocms7"]
+[ext_resource type="Script" uid="uid://2xy44chgl25" path="res://scenes/clicker/first_button_upgrade.gd" id="3_uld5h"]
+[ext_resource type="Texture2D" uid="uid://dyratjfbdlsur" path="res://assets/20250421manaSoulButtonA-Sheet.png" id="4_rvbc2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hof2"]
-atlas = ExtResource("2_4xgn7")
+atlas = ExtResource("2_ocms7")
 region = Rect2(570, 0, 190, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jva1n"]
-atlas = ExtResource("2_4xgn7")
+atlas = ExtResource("2_ocms7")
 region = Rect2(760, 0, 190, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_njxam"]
-atlas = ExtResource("2_4xgn7")
+atlas = ExtResource("2_ocms7")
 region = Rect2(950, 0, 190, 160)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2r2dr"]
-atlas = ExtResource("2_4xgn7")
+atlas = ExtResource("2_ocms7")
 region = Rect2(1140, 0, 190, 160)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2efjs"]
@@ -45,15 +45,15 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2efjs"]
-atlas = ExtResource("3_1hof2")
+atlas = ExtResource("4_rvbc2")
 region = Rect2(0, 0, 96, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3d4n4"]
-atlas = ExtResource("3_1hof2")
+atlas = ExtResource("4_rvbc2")
 region = Rect2(192, 0, 96, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7a3eh"]
-atlas = ExtResource("3_1hof2")
+atlas = ExtResource("4_rvbc2")
 region = Rect2(288, 0, 96, 22)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_q317y"]
@@ -76,7 +76,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="PrototypeClicker" type="Control" node_paths=PackedStringArray("label")]
+[node name="BookKeeperClicker" type="Control" node_paths=PackedStringArray("label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,8 +87,17 @@ offset_right = 3.0
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_tckfa")
+script = ExtResource("1_du17k")
 label = NodePath("PagesValueLabel")
+
+[node name="FirstUpgradeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 52.9999
+offset_top = 94.9997
+offset_right = 361.0
+offset_bottom = 144.0
+text = "Click Multiplier: <click_multiplier_value>
+Price: <price_value>"
 
 [node name="PagesValueLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(0, 80)
@@ -135,7 +144,7 @@ offset_top = 74.0
 offset_right = 165.0
 offset_bottom = 111.0
 mouse_default_cursor_shape = 2
-script = ExtResource("3_jva1n")
+script = ExtResource("3_uld5h")
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="FirstButtonUpgrade"]
@@ -145,15 +154,6 @@ sprite_frames = SubResource("SpriteFrames_q317y")
 animation = &"button_press"
 frame = 3
 frame_progress = 1.0
-
-[node name="FirstUpgradeLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 53.0
-offset_top = 95.0
-offset_right = 361.0
-offset_bottom = 144.0
-text = "Click Multiplier: <click_multiplier_value>
-Price: <price_value>"
 
 [connection signal="pressed" from="TurnPageButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="FirstButtonUpgrade" to="FirstButtonUpgrade" method="_on_button_pressed"]
