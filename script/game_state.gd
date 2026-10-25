@@ -3,15 +3,19 @@ extends Node
 signal data_changed(key: String, value: Variant)
 
 # Enum for upgrade types
-enum UpgradeType { FIRST_UPGRADE }
+enum UpgradeType { FIRST_UPGRADE, DAILY_HABIT }
 
 # Data structure
 var data: Dictionary = {
 	"pages": 0,
 	"upgrades": {
 		UpgradeType.FIRST_UPGRADE: {
-			"click_multiplier": 1,
+			"multiplier": 1,
 			"price": 10
+		},
+		UpgradeType.DAILY_HABIT: {
+			"multiplier": 1,
+			"price": 100
 		}
 	}
 }
@@ -34,7 +38,7 @@ func load() -> void:
 		data["pages"] = 0
 	if not data.has("upgrades"):
 		data["upgrades"] = {
-			UpgradeType.FIRST_UPGRADE: {"click_multiplier": 1, "price": 10}
+			UpgradeType.FIRST_UPGRADE: {"multiplier": 1, "price": 10}
 		}
 
 # --- Helper Functions ---
@@ -64,8 +68,8 @@ func spend_pages(amount: int, auto_save: bool = true) -> bool:
 	return false
 
 func update_upgrade(upgrade_type: int, click_inc: int = 1, price_mult: float = 1.5, auto_save: bool = true) -> void:
-	var u: Dictionary = data["upgrades"].get(upgrade_type, {"click_multiplier": 1, "price": 10})
-	u["click_multiplier"] += click_inc
+	var u: Dictionary = data["upgrades"].get(upgrade_type, {"multiplier": 1, "price": 10})
+	u["multiplier"] += click_inc
 	u["price"] = int(u["price"] * price_mult)
 	data["upgrades"][upgrade_type] = u
 	emit_signal("data_changed", "upgrades", data["upgrades"])
@@ -76,5 +80,5 @@ func get_upgrade(upgrade_type: int) -> Dictionary:
 	# Returns the upgrade dictionary for the given type, with default fallback
 	var upgrades: Dictionary = data.get("upgrades", {})
 	if not upgrades.has(upgrade_type):
-		upgrades[upgrade_type] = {"click_multiplier": 1, "price": 10}
+		upgrades[upgrade_type] = {"multiplier": 1, "price": 10}
 	return upgrades[upgrade_type]

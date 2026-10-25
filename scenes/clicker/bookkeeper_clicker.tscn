@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://emuvws28axty"]
+[gd_scene load_steps=17 format=3 uid="uid://emuvws28axty"]
 
 [ext_resource type="Script" uid="uid://b8ncubte35br3" path="res://scenes/clicker/bookkeeper_clicker.gd" id="1_du17k"]
 [ext_resource type="Texture2D" uid="uid://bjs4exk5ymyy5" path="res://assets/RADL_Book.png" id="2_ocms7"]
 [ext_resource type="Script" uid="uid://2xy44chgl25" path="res://scenes/clicker/first_button_upgrade.gd" id="3_uld5h"]
 [ext_resource type="Texture2D" uid="uid://dyratjfbdlsur" path="res://assets/20250421manaSoulButtonA-Sheet.png" id="4_rvbc2"]
+[ext_resource type="Script" uid="uid://csv8iwyg7aqdy" path="res://scenes/clicker/daily_habit_autoread.gd" id="5_ocms7"]
+[ext_resource type="Texture2D" uid="uid://bm5llrqirfimt" path="res://assets/atomic-habits.jpg" id="6_uld5h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hof2"]
 atlas = ExtResource("2_ocms7")
@@ -76,6 +78,17 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_rvbc2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_uld5h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="BookKeeperClicker" type="Control" node_paths=PackedStringArray("label")]
 layout_mode = 3
 anchors_preset = 15
@@ -96,7 +109,8 @@ offset_left = 52.9999
 offset_top = 94.9997
 offset_right = 361.0
 offset_bottom = 144.0
-text = "Click Multiplier: <click_multiplier_value>
+text = "READ FASTER
+Click Multiplier: <multiplier_value>
 Price: <price_value>"
 
 [node name="PagesValueLabel" type="Label" parent="."]
@@ -110,6 +124,16 @@ theme_type_variation = &"HeaderLarge"
 text = "Pages: <value>"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="DailyHabitLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 665.0
+offset_top = 107.0
+offset_right = 892.0
+offset_bottom = 182.0
+text = "Daily Reading Habit:
+Multiplier: <multiplier_value>
+Price: <price_value>"
 
 [node name="TurnPageButton" type="TextureButton" parent="." groups=["Persist"]]
 custom_minimum_size = Vector2(160, 40)
@@ -135,12 +159,12 @@ animation = &"PageFlip"
 [node name="FirstButtonUpgrade" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0772569
-anchor_top = 0.128086
-anchor_right = 0.0772569
-anchor_bottom = 0.128086
-offset_left = 39.0
-offset_top = 74.0
+anchor_left = -0.0111042
+anchor_top = 0.166889
+anchor_right = 0.0225694
+anchor_bottom = 0.21142
+offset_left = 74.792
+offset_top = 76.856
 offset_right = 165.0
 offset_bottom = 111.0
 mouse_default_cursor_shape = 2
@@ -154,6 +178,19 @@ sprite_frames = SubResource("SpriteFrames_q317y")
 animation = &"button_press"
 frame = 3
 frame_progress = 1.0
+
+[node name="DailyHabitButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 568.0
+offset_top = 101.0
+offset_right = 646.0
+offset_bottom = 210.0
+script = ExtResource("5_ocms7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="DailyHabitButton"]
+position = Vector2(42, 54)
+scale = Vector2(0.092006, 0.099)
+sprite_frames = SubResource("SpriteFrames_rvbc2")
 
 [connection signal="pressed" from="TurnPageButton" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="FirstButtonUpgrade" to="FirstButtonUpgrade" method="_on_button_pressed"]

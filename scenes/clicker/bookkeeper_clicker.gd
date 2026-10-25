@@ -14,7 +14,7 @@ func _ready() -> void:
 	update_label()
 
 func _on_button_pressed() -> void:
-	var mult: int = GameState.get_upgrade(upgrade_type)["click_multiplier"]
+	var mult: int = GameState.get_upgrade(upgrade_type)["multiplier"]
 	GameState.add_pages(mult)
 	play_turn_anim()
 
